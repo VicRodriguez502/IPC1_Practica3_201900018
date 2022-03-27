@@ -1,12 +1,7 @@
 #IMPORTACIONES 
-from ast import excepthandler
-from cmath import e
-from pydoc import plain
 import random
 from comida import Comida
 from jugador import jugador
-
-
 
 
 #******************************************************************************************************************************
@@ -61,7 +56,7 @@ def Posiciones(jugadores):
         print("2. {0} - {1} MOVIIENTOS {2} PUNTOS". format (jugadores.nombre, jugadores.movimientos, jugadores.puntos))  
     elif jugadores == 1:
         print("3. {0} - {1} MOVIIENTOS {2} PUNTOS". format (jugadores.nombre, jugadores.movimientos, jugadores.puntos))  
-        
+
 
 
 #***************************************************************************************************************
