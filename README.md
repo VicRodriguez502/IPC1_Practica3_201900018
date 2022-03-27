@@ -2,4 +2,4 @@
 - *Victor Eduardo José Rodriguez Alonzo*
 - *201900018*
 - **IPC1**
-- **"D"**
+- **D**

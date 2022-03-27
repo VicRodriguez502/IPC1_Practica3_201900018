@@ -1,26 +1,30 @@
-from re import X
-
-
 class jugador():
-    
-    #CONSTRUCTOR PARA JUGADOR
-    def __init__(self,x,y):
-        self.x = x
-        self.y = y
+    def __init__(self):
+        self.posx = -1
+        self.posy = -1
         self.puntos = 0
-        self.mov = 0
-    
-    #ENCAPSULAMIENTO PARA PARAMETROS DE JUGADOR
-    def getX(self):
-        return self.x
-    
-    def getY(self):
-        return self.y
-    
+        self.movimientos = 0
+
+    def getPosX(self):
+        return self.posx
+
+    def getPosY(self):
+        return self.posy
+
+    def getMovimientos(self):
+        return self.movimientos
+
     def getPuntos(self):
         return self.puntos
-    
-    def getMov(self):
-        return self.mov
-    
-    
+
+    def setPosY(self, _posy):
+        self.posy = _posy
+
+    def setPosX(self, _posx):
+        self.posx = _posx
+
+    def addMovimiento(self):
+        self.movimientos = self.movimientos + 1
+
+    def addPuntos(self):
+        self.puntos = self.puntos + 5
