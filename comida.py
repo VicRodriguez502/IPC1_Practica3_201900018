@@ -1,5 +1,5 @@
 class Comida():
-     
+    
     def __init__(self, posx, posy): ##Init sirve para el constructor
         self.posx = posx ##EL SELF ES IGUAL A THIS
         self.posy = posy                   

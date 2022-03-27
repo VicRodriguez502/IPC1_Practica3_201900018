@@ -1,5 +1,6 @@
 class jugador():
     def __init__(self):
+        self.nombre = ""
         self.posx = -1
         self.posy = -1
         self.puntos = 0
