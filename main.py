@@ -3,6 +3,9 @@ import random
 from comida import Comida
 from jugador import jugador
 
+#Variable global para ingresar jugadores a la lista
+listaJugadores = []
+
 
 #******************************************************************************************************************************
 #TODO RELACIONADO CON EL MENU.
@@ -20,12 +23,12 @@ def menu(jugadores):
             Inicio(jugadores)
 
         elif(num == 2):
-            Posiciones(jugadores)
+            Posiciones()
 
         elif(num == 3):
             break 
 
-#****************************************************************************************************************
+#***************************************************************************************************************************
 #TODO LO RELACIONADO CON EL INICIO DEL JUEGO
 #MÉTODO PARA INICIAR JUEGO
 def Inicio(jugadores):
@@ -45,17 +48,20 @@ def Inicio(jugadores):
 #***************************************************************************************************************
 #TODO LO RELACIONADO CON LA TABLA DE POSICIONES
 #MÉTODO PARA LA TABLA DE POSICIONES
-def Posiciones(jugadores):
-    Primerlugar = -1
-    segundolugar = 0
-    tercerlugar = 1
+def Posiciones():
+    listaJugadores.sort()
     
-    if jugadores == -1:
-        print("1. {0} - {1} MOVIIENTOS {2} PUNTOS". format (jugadores.nombre, jugadores.movimientos, jugadores.puntos))
-    elif jugadores == 0:
-        print("2. {0} - {1} MOVIIENTOS {2} PUNTOS". format (jugadores.nombre, jugadores.movimientos, jugadores.puntos))  
-    elif jugadores == 1:
-        print("3. {0} - {1} MOVIIENTOS {2} PUNTOS". format (jugadores.nombre, jugadores.movimientos, jugadores.puntos))  
+    print("TABLA DE POSICIONES: ")
+    if len(listaJugadores) == 1:
+        print("1. {0} - {1} MOVIMIENTOS {2} - PUNTOS". format (listaJugadores[0].nombre, str(listaJugadores[0].movimientos) , str(listaJugadores[0].puntos)))
+    elif len(listaJugadores) == 2:
+        print("1. {0} - {1} MOVIMIENTOS {2} - PUNTOS". format (listaJugadores[0].nombre, str(listaJugadores[0].movimientos) , str(listaJugadores[0].puntos)))
+        print("2. {0} - {1} MOVIMIENTOS {2} - PUNTOS". format (listaJugadores[1].nombre, str(listaJugadores[1].movimientos) , str(listaJugadores[1].puntos)))
+    elif len(listaJugadores) == 3:
+        print("1. {0} - {1} MOVIMIENTOS {2} PUNTOS". format (listaJugadores[0].nombre, str(listaJugadores[0].movimientos) , str(listaJugadores[0].puntos)))
+        print("2. {0} - {1} MOVIMIENTOS {2} PUNTOS". format (listaJugadores[1].nombre, str(listaJugadores[1].movimientos) , str(listaJugadores[1].puntos)))
+        print("3. {0} - {1} MOVIMIENTOS {2} PUNTOS". format (listaJugadores[2].nombre, str(listaJugadores[2].movimientos) , str(listaJugadores[2].puntos)))
+    print("************************************")
 
 
 
@@ -67,32 +73,27 @@ def movimientos(jugadores, comidita):
         movimiento = input("Movimiento: ")
         if str(movimiento) == "a" or str(movimiento) == "4":
             Izquierda(jugadores, comidita)
-            print(" - JUGADOR: {0} - PUNTOS: {1} - MOVIMIMENTOS: {2}".format(jugadores.nombre,jugadores.getPuntos(), jugadores.getMovimientos()))
-            matriz = Tablero(comidita, jugadores)
-            GenerarTablero(matriz)
-            if jugadores.getPuntos() == 40 or HabraComidas(comidita):
-                break
         elif str(movimiento) == "d" or str(movimiento) == "6":
             Derecha(jugadores, comidita)
-            print(" - JUGADOR: {0} - PUNTOS: {1} - MOVIMIMENTOS: {2}".format(jugadores.nombre,jugadores.getPuntos(), jugadores.getMovimientos()))
-            matriz = Tablero(comidita, jugadores)
-            GenerarTablero(matriz)
-            if jugadores.getPuntos() == 40 or HabraComidas(comidita):
-                break 
         elif str(movimiento) == "w" or str(movimiento) == "8":
             Arriba(jugadores, comidita)
-            print(" - JUGADOR: {0} - PUNTOS: {1} - MOVIMIMENTOS: {2}".format(jugadores.nombre,jugadores.getPuntos(), jugadores.getMovimientos()))
-            matriz = Tablero(comidita, jugadores)
-            GenerarTablero(matriz)
-            if jugadores.getPuntos() == 40 or HabraComidas(comidita):
-                break
         elif str(movimiento) == "s" or str(movimiento) == "5":
             Abajo(jugadores, comidita)
-            print(" - JUGADOR: {0} - PUNTOS: {1} - MOVIMIMENTOS: {2}".format(jugadores.nombre,jugadores.getPuntos(), jugadores.getMovimientos()))
-            matriz = Tablero(comidita, jugadores)
-            GenerarTablero(matriz)
-            if jugadores.getPuntos() == 40 or HabraComidas(comidita):
-                break 
+        elif str(movimiento) == "e":
+            return menu(jugadores)
+        print(" - JUGADOR: {0} - PUNTOS: {1} - MOVIMIMENTOS: {2}".format(jugadores.nombre,jugadores.getPuntos(), jugadores.getMovimientos()))
+        matriz = Tablero(comidita, jugadores)
+        GenerarTablero(matriz)
+        if jugadores.getPuntos() == 40 or HabraComidas(comidita):
+            aux = jugador()
+            aux.nombre = jugadores.nombre
+            aux.puntos = jugadores.puntos
+            aux.movimientos = jugadores.movimientos
+            listaJugadores.append(aux)
+            jugadores.nombre = ""
+            jugadores.puntos = 0
+            jugadores.movimientos = 0
+            break
             
 
 #MÉTODO PARA LA POSICIÓN ALEATORIA DEL JUGADOR  
@@ -131,7 +132,7 @@ def Derecha(jugadores, comidita):
     x = jugadores.getPosX() 
     y = jugadores.getPosY() + 1
     
-    if y >= 0:
+    if y <= 9:
         jugadores.setPosX(int(x))
         jugadores.setPosY(int(y))
         m = sigComida(jugadores, comidita)
@@ -153,7 +154,7 @@ def Abajo(jugadores, comidita):
     x = jugadores.getPosX() + 1
     y = jugadores.getPosY() 
     
-    if x >= 0:
+    if x <= 9:
         jugadores.setPosX(int(x))
         jugadores.setPosY(int(y))
         m = sigComida(jugadores, comidita)

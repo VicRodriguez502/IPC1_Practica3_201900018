@@ -5,6 +5,8 @@ class jugador():
         self.posy = -1
         self.puntos = 0
         self.movimientos = 0
+        
+    
 
     def getPosX(self):
         return self.posx
@@ -29,3 +31,6 @@ class jugador():
 
     def addPuntos(self):
         self.puntos = self.puntos + 5
+        
+    def __gt__(self, j):
+        return self.movimientos > j.movimientos
