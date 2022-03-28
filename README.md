@@ -1,5 +1,5 @@
 # IPC1_Practica3_201900018
 - *Victor Eduardo José Rodriguez Alonzo*
 - *201900018*
-- **IPC1**
-- **D**
+- *Introducción a la Programación 1*
+- *Sección: D*
